@@ -25,10 +25,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * books table (Section 7).
- * Book metadata, cover URL, description and publishing information.
- */
+/** books table (Section 7). Book metadata, cover URL, description and publishing information. */
 @Entity
 @Table(name = "books")
 @Getter
@@ -50,13 +47,7 @@ public class BookEntity {
     @ToString.Exclude
     private AuthorEntity author;
 
-    /**
-     * Simple category label for now (e.g. "Productivity", "Psychology").
-     * Note: blueprint's domain diagram shows a Category relationship, but the
-     * core tables list (Section 7) doesn't define a separate categories table.
-     * Promote to its own CategoryEntity + many-to-many later if you need
-     * multi-category tagging or category-level browsing pages.
-     */
+    /** Simple category label for now; promote to its own entity later if needed. */
     private String category;
 
     @Lob
@@ -71,10 +62,6 @@ public class BookEntity {
     @Column(name = "published_year")
     private Integer publishedYear;
 
-    /**
-     * Ordered topics (1..12) belonging to this book.
-     * cascade + orphanRemoval so removing a book cleans up its topics.
-     */
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("topicNumber ASC")
     @JsonIgnore

@@ -12,10 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Author metadata. Supports reuse across multiple books
- * (an author can be linked to more than one Book).
- */
+/** Author metadata. Supports reuse across multiple books. */
 @Entity
 @Table(name = "authors")
 @Getter

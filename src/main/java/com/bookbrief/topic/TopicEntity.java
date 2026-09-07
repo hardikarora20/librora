@@ -24,10 +24,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * topics table (Section 7).
- * One of the ~10-12 ordered major ideas belonging to a book.
- */
+/** topics table (Section 7). One of the ~10-12 ordered major ideas belonging to a book. */
 @Entity
 @Table(name = "topics")
 @Getter
@@ -45,7 +42,6 @@ public class TopicEntity {
     @ToString.Exclude
     private BookEntity book;
 
-    /** 1-based position of this topic within its book (e.g. 3 of 12). */
     @NotNull
     @Column(name = "topic_number", nullable = false)
     private Integer topicNumber;
@@ -59,10 +55,6 @@ public class TopicEntity {
     @Column(name = "estimated_read_minutes")
     private Integer estimatedReadMinutes;
 
-    /**
-     * Ordered content blocks that make up this topic's reader-friendly document.
-     * cascade + orphanRemoval so deleting/updating a topic's blocks stays consistent.
-     */
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("blockOrder ASC")
     @JsonIgnore
